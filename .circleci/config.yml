@@ -21,7 +21,23 @@ jobs:
       - run:
           name: Run Pytest tests
           command: |
-            pytest -v
+            pytest --alluredir=allure-results --maxfail=1 --disable-warnings -q
+      - store_artifacts:
+          path: allure-results
+          destination: allure-results
+
+      # Generate Allure HTML report
+      - run:
+          name: Generate Allure HTML report
+          command: |
+            wget https://github.com/allure-framework/allure2/releases/latest/download/allure-2.30.0.zip
+            unzip allure-2.30.0.zip -d /tmp/allure
+            /tmp/allure/allure-2.30.0/bin/allure generate allure-results --clean -o allure-report
+
+      # Store HTML report as artifact
+      - store_artifacts:
+          path: allure-report
+          destination: allure-report
 
 workflows:
   version: 2
