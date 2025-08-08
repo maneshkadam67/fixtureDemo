@@ -21,6 +21,12 @@ def setup(request):
     prefs = {"profile.default_content_setting_values.notifications": 1}  # 1 = allow
     chrome_options.add_experimental_option("prefs", prefs)
 
+    chrome_options.add_argument("--headless=new")  # or "--headless" if using older chrome
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--window-size=1920,1080")
+
     driver = webdriver.Chrome(options=chrome_options)
     driver.maximize_window()
 
