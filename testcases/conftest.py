@@ -15,7 +15,7 @@ def health_check():
         pytest.skip(f"Health check failed: {e}")
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def setup(request):
     chrome_options = webdriver.ChromeOptions()
     prefs = {"profile.default_content_setting_values.notifications": 1}  # 1 = allow
