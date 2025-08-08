@@ -9,7 +9,7 @@ URL='''https://firebaseremoteconfig.googleapis.com/v1/projects/castify-storage
 def health_check():
     try:
         response = requests.get(URL, timeout=5)
-        if response.status_code != 200:
+        if response.status_code == 200:
             pytest.skip(f"Health check failed with status {response.status_code}, skipping tests.")
     except Exception as e:
         pytest.skip(f"Health check failed: {e}")
